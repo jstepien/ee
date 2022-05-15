@@ -24,9 +24,7 @@ fn main() {
         .args(
             long_names
                 .iter()
-                .map(|a| matches.value_of(a).map(|s| format!("{a}={s}")))
-                .filter(|s| s.is_some())
-                .map(|s| s.unwrap()),
+                .filter_map(|n| matches.value_of(n).map(|v| format!("{n}={v}"))),
         )
         .status()
         .expect("dd declined");
